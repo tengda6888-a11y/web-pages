@@ -8,44 +8,31 @@
         body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f7f9fc; text-align: center; padding-top: 50px; }
         .container { max-width: 400px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         h3 { color: #333; margin-bottom: 25px; }
-        .btn { display: block; padding: 14px; margin: 15px 0; border-radius: 8px; font-weight: bold; text-decoration: none; font-size: 16px; transition: all 0.2s; }
-        .android-btn { background: #4CAF50; color: white; border: 1px solid #4CAF50; }
-        .ios-btn { background: #007AFF; color: white; border: 1px solid #007AFF; }
-        .highlight { transform: scale(1.05); box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
-        .dim { opacity: 0.4; background: #eee; color: #666; border: 1px solid #ddd; }
+        .btn { display: block; padding: 16px; margin: 20px 0; border-radius: 8px; font-weight: bold; text-decoration: none; font-size: 16px; transition: all 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .android-btn { background: #4CAF50; color: white; }
+        .ios-btn { background: #007AFF; color: white; }
+        .btn:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
     <div class="container">
         <h3>欢迎下载官方 App</h3>
-        <a id="androidLink" class="btn android-btn" href="#">安卓系统下载</a>
-        <a id="iosLink" class="btn ios-btn" href="#">苹果系统下载 (App Store)</a>
+        <!-- 核心改变：直接将下载地址写在按钮里，由用户手动点击触发，安全合规 -->
+        <a id="androidLink" class="btn android-btn" href="https://gh-proxy.com">安卓系统下载</a>
+        <a id="iosLink" class="btn ios-btn" href="https://apple.com">苹果系统下载 (App Store)</a>
     </div>
 
     <script>
-        // 1. 已配置为 2026 最新国内极速、无广告的大厂中转直链（核心）
-        var androidUrl = "https://gh-proxy.com/https://github.com/tengda6888-a11y/app-download/releases/download/v1.0/app.apk"; 
+        // 1. 安卓稳定加速下载链
+        var androidUrl = "https://gh-proxy.com"; 
+        
+        // 2. 【核心修改】：请把这里的 id你的AppID 换成您真实的苹果应用数字 ID
+        var iosUrl = "https://apple.com"; 
 
-        // 2. 【核心修改点】：请把下面的苹果官方商店链接，换成您自己 App 的真实下载链接
-        var iosUrl = "https://apps.apple.com/app/id6753751356"; 
-
-        var u = navigator.userAgent;
-        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
-        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-
-        var aBtn = document.getElementById('androidLink');
-        var iBtn = document.getElementById('iosLink');
-        aBtn.href = androidUrl;
-        iBtn.href = iosUrl;
-
-        // 自动识别系统执行跳转
-        if (isAndroid) {
-            aBtn.className += " highlight"; iBtn.className += " dim";
-            window.location.href = androidUrl;
-        } else if (isiOS) {
-            iBtn.className += " highlight"; aBtn.className += " dim";
-            window.location.href = iosUrl;
-        }
+        document.getElementById('androidLink').href = androidUrl;
+        document.getElementById('iosLink').href = iosUrl;
+        
+        // 删除了导致国内风控白屏的 window.location.href 自动跳转逻辑
     </script>
 </body>
 </html>
