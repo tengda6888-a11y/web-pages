@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>官方应用下载中心</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f7f9fc; text-align: center; padding-top: 50px; }
+        .container { max-width: 400px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        h3 { color: #333; margin-bottom: 25px; }
+        .btn { display: block; padding: 14px; margin: 15px 0; border-radius: 8px; font-weight: bold; text-decoration: none; font-size: 16px; transition: all 0.2s; }
+        .android-btn { background: #4CAF50; color: white; border: 1px solid #4CAF50; }
+        .ios-btn { background: #007AFF; color: white; border: 1px solid #007AFF; }
+        .highlight { transform: scale(1.05); box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+        .dim { opacity: 0.4; background: #eee; color: #666; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>欢迎下载官方 App</h3>
+        <a id="androidLink" class="btn android-btn" href="#">安卓系统下载</a>
+        <a id="iosLink" class="btn ios-btn" href="#">苹果系统下载 (App Store)</a>
+    </div>
+
+    <script>
+        // 【无需修改】：这里使用了相对路径，只要把 index.html 和 app.apk 放在同一个文件夹上传即可！
+        var androidUrl = "./app.apk"; 
+
+        // 【修改这里】：填入您的苹果 App Store 链接
+        var iosUrl = "https://apps.apple.com/app/id6753751356"; 
+
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+
+        var aBtn = document.getElementById('androidLink');
+        var iBtn = document.getElementById('iosLink');
+        aBtn.href = androidUrl;
+        iBtn.href = iosUrl;
+
+        if (isAndroid) {
+            aBtn.className += " highlight"; aBtn.href = androidUrl;
+            window.location.href = androidUrl;
+        } else if (isiOS) {
+            iBtn.className += " highlight"; iBtn.href = iosUrl;
+            window.location.href = iosUrl;
+        }
+    </script>
+</body>
+</html>
